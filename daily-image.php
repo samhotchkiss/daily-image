@@ -73,6 +73,7 @@ function di_maybe_post_pics()
 					'post_parent' => $pid
 				)
 			);
+			wp_set_post_tags( $pid, $data['tags'] );
 			if( isset( $_POST['set_featured_image'] ) ) {
 				set_post_thumbnail( $pid, $attachment_id );
 			}
@@ -80,19 +81,21 @@ function di_maybe_post_pics()
 		}
 	}
 
-	wp_redirect( admin_url( 'tools.php?page=daily_image&success=' . $success ) );
+	wp_redirect( admin_url( 'edit.php?page=daily_image&success=' . $success ) );
 
 }
 
 add_action('admin_menu', 'di_setup_menu');
 function di_setup_menu() {
-	add_submenu_page( 'tools.php', 'Daily Image', 'Daily Image', 'publish_posts', 'daily_image', 'daily_image_admin_ui' );
+	add_submenu_page( 'edit.php', 'Daily Image', 'Daily Image', 'publish_posts', 'daily_image', 'daily_image_admin_ui' );
 }
 
 function daily_image_admin_ui() {
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
+	wp_enqueue_script( 'tags-suggest' );
 	wp_enqueue_style( 'daily-image', plugins_url( 'admin-ui.css', __FILE__ ) );
+
 	require 'admin-ui.php';
 }
 

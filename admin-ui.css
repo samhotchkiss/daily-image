@@ -1,7 +1,7 @@
 #di_list li {
 	display: block;
 	background-color: #eff8ff;
-	height: 150px;
+	height: 180px;
 	padding: 15px;
 	width: 765px;
 	position: relative;
@@ -13,12 +13,15 @@
 	background-color: #e5f3ff;
 	border-color: #91cdff;
 }
-#di_list li img {
+#di_list li a.thumbholder {
 	display: block;
 	float: left;
 	margin-right: 15px;
+	font-size: 17px;
+	line-height: 25px;
+	text-align: center;
 }
-#di_list li input[type=text] {
+#di_list li input[type=text].title {
 	display: block;
 	width: 600px;
 	height: 37px;
@@ -46,10 +49,15 @@
 	font-size: 20px;
 	padding-top: 4px;
 }
-#di_list li a:hover {
+#di_list li a.delete:hover {
 	background-color: #000;
 }
 
+#di_list li .tags {
+	width: 600px;
+	margin-top: 5px;
+	display: block;
+}
 
 
 

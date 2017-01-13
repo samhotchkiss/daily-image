@@ -15,17 +15,22 @@
 
 
 
-<form class="" action="<?php echo admin_url( 'tools.php?page=daily_image&postit' ); ?>" method="post">
+<form class="" action="<?php echo admin_url( 'edit.php?page=daily_image&postit' ); ?>" method="post">
 
 	<ul id="di_list">
 		<?php if ( $unattached ): ?>
 			<?php foreach ( $unattached as $u ): ?>
 				<li id="di_image_<?php echo $u['id'] ?>">
-					<a href="<?php echo admin_url( 'post.php?post=' . $u['id'] . '&action=edit' ) ?>" target="_blank">
-						<img src="<?php echo $u['thumb'] ?>" class="di_thumb" width="150" height="150" />
+					<a href="<?php echo admin_url( 'post.php?post=' . $u['id'] . '&action=edit' ) ?>" target="_blank" class="thumbholder">
+						<img src="<?php echo $u['thumb'] ?>" class="di_thumb" width="150" height="150" /><br />View Full Image
 					</a>
-					<input type="text" name="image[<?php echo $u['id'] ?>][title]" value="<?php echo $u['title'] ?>" />
-					<textarea name="image[<?php echo $u['id'] ?>][body]" rows="8" cols="80"><?php echo $u['caption'] ?></textarea>
+					<input type="text" name="image[<?php echo $u['id'] ?>][title]" value="<?php echo $u['title'] ?>" class="title"/>
+					<textarea name="image[<?php echo $u['id'] ?>][body]" rows="8" cols="80"  placeholder="Post Body
+
+You can use the [image] tag to place your image in a custom location, otherwise it will be placed at the beginning of your post." ><?php echo $u['caption'] ?></textarea>
+
+					<input type="text" name="image[<?php echo $u['id'] ?>][tags]" value="" class="tags" placeholder="Tags" />
+
 					<a href="#" class="delete" onclick="di_delete_image(<?php echo $u['id'] ?>); return false;">x</a>
 				</li>
 			<?php endforeach; ?>
@@ -40,7 +45,7 @@
 				Publish first image on...
 			</th>
 			<td>
-				<input type="text" name="start_date" value="<?php echo $default_date['date'] ?>" id="di_start_date" />
+				<input type="text" name="start_date" value="<?php echo $default_date['date'] ?>" id="di_start_date" /> <small>Defaults to one day after your last scheduled post. Don't break the chain!</small>
 			</td>
 		</tr>
 		<tr>
@@ -72,6 +77,7 @@
 	window.onload = function(){
 		jQuery( '#di_list' ).sortable();
 		jQuery( '#di_start_date' ).datepicker();
+		jQuery( '.tags' ).wpTagsSuggest();
 	};
 	function di_delete_image( id ) {
 		jQuery( '#di_image_' + id ).remove();
