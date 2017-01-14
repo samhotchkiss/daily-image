@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Daily Image
-Plugin URI: https://swh.me/
-Description: A daily dashboard for your life.
+Plugin URI: https://sam.blog/
+Description: Easily create a photo post every day featuring the unattached media in your WordPress media library.
 Author: samhotchkiss
 Author URI: https://sam.blog/
-Version: 0.1
+Version: 1.0
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
@@ -151,17 +151,4 @@ function di_get_unattached_and_lonely()
 
 }
 
-
-
-if( isset( $_GET['di'] ) ) {
-	$args = array(
-		'posts_per_page'   => 200,
-		'post_type'        => 'attachment',
-		'post_parent'      => '0'
-	);
-	$posts_array = get_posts( $args );
-
-	echo '<pre>';
-	print_r( $posts_array );
-	exit;
-}
+add_filter( 'jp_carousel_load_for_images_linked_to_file', '__return_true' );
