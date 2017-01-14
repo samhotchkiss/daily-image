@@ -3,12 +3,30 @@
 	background-color: #ddd;
     height: 180px;
     padding: 5px;
-    width: 765px;
+    width: 1065px;
     position: relative;
     margin-bottom: 5px;
     padding-left: 50px;
 }
-
+#di_list .tagcloud {
+	width: 400px;
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	height: 180px;
+	overflow: hidden;
+}
+#di_list .tagcloud .loader {
+	position: absolute;
+	top: 43px;
+	right: 151px;
+}
+#di_list .tagcloud p.the-tagcloud {
+	line-height: 19px;
+	letter-spacing: -.3px;
+	margin-top: 0px;
+	display: none;
+}
 #di_list div.draghandle {
 	background-color: black;
 	color: white;
@@ -33,14 +51,14 @@
 }
 #di_list li input[type=text].title {
 	display: block;
-	width: 600px;
+	width: 490px;
 	height: 37px;
 	margin-bottom: 5px;
 	font-size: 23px;
 }
 #di_list li textarea {
 	display: block;
-	width: 600px;
+	width: 490px;
 	height: 107px;
 }
 #di_list li a.delete {
@@ -62,18 +80,28 @@
 #di_list li a.delete:hover {
 	background-color: #000;
 }
-
+table.di_dow_table {
+	border-spacing: 0px;
+}
+table.di_dow_table td {
+	padding: 0 8px 4px 8px;
+	text-align: center;
+	width: 80px;
+}
+table.di_dow_table td:nth-child(even) {
+	background-color: #ddd;
+}
 #di_list li .tags {
-	width: 600px;
+	width: 490px;
 	margin-top: 5px;
 	display: block;
 }
 
-.publish_date {
+#di_list .publish_date {
     position: absolute;
     color: #888;
     padding: 3px;
-    right: 5px;
+    right: 415px;
     top: 19px;
     font-size: 21px;
 }

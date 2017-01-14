@@ -11,7 +11,6 @@ License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2
 
 
 function callback_di_remove_image( $id ) {
-	// TODO: noncing
 	$id = $_POST[ 'attachment_id' ];
 	if( !current_user_can( 'publish_posts' ) ) {
 		wp_die();
@@ -31,12 +30,6 @@ function di_maybe_post_pics()
 		return;
 	}
 
-	$starttime = strtotime( $_POST['start_date'] . ' ' . $_POST['daily_time'] );
-
-	if( $starttime < time() ) {
-		wp_die( 'Invalid start time: it must be in the future.' );
-	}
-
 	$success = 0;
 
 	foreach( $_POST['image'] as $attachment_id => $data ) {
@@ -53,8 +46,7 @@ function di_maybe_post_pics()
 			$body = str_ireplace( '[image]', $image, $data['body'] );
 		}
 
-		$publish_date = date( 'Y-m-d H:i:s', $starttime );
-		$starttime = $starttime + DAY_IN_SECONDS;
+		$publish_date = date( 'Y-m-d H:i:s', strtotime( $data['date'] . ' ' . $_POST['daily_time'] ) );
 
 		// Insert the post into the database
 		$pid = wp_insert_post(
@@ -94,6 +86,7 @@ function daily_image_admin_ui() {
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_enqueue_script( 'tags-suggest' );
+	wp_enqueue_script( 'tags-box' );
 	wp_enqueue_style( 'daily-image', plugins_url( 'admin-ui.css', __FILE__ ) );
 
 	require 'admin-ui.php';
